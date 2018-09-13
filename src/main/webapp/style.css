@@ -1,0 +1,103 @@
+body {
+    background-color: #d1d1d1;
+    background-image: url("https://i.imgur.com/keok7aR.png");
+    margin: 0px;
+}
+
+textarea {
+    resize: none;
+}
+
+.cv-block {
+    text-align: left;
+    background: #c0c0c0;
+    border: 0;
+    width: 600px;
+    margin: 30px auto;
+    padding: 10px;
+    border-radius: 0;
+}
+
+.cv-block textarea {
+    height: 100px;
+    width: 580px;
+}
+
+.page-block {
+    text-align: center;
+    background: white;
+    border: 3px solid #560f7a;
+    margin: 30px auto;
+    width: 800px;
+    padding: 10px;
+    border-radius: 0;
+    box-shadow: 5px 5px 3px grey;
+}
+
+.page-block div {
+    padding: 10px;
+}
+
+
+/*menu bar*/
+#top-menu-bar {
+    text-align: left;
+    background-color: #000000;
+    /*black paper background*/
+    background-image: url("https://i.imgur.com/PLvrKbz.png");
+    color:#fff;
+    padding: 15px;
+}
+
+#top-menu-bar ul {
+    width:auto;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    padding: 0;
+}
+#top-menu-bar li {
+    display:inline; margin:0;
+    padding:0;
+}
+
+#top-menu-bar ol{
+    display: inline;
+    text-align: right; margin: 0;
+    padding: 0;
+    float: right;
+}
+#top-menu-bar a {
+    text-decoration: none;
+    padding: 0 15px 0 15px;
+    color: #fff;
+}
+#top-menu-bar a:visited {
+    color: #fff;
+}
+#top-menu-bar a:hover {
+    color: #334455; background: #fff;
+    border-radius: 30px 5px 30px 5px;
+}
+
+#contact-bar {
+
+}
+
+#parent_div_1, #parent_div_2{
+    width:auto;
+    height:10px;
+    margin-right:10px;
+    float:left;
+}
+
+.message_div{
+    width: 580px;
+    background: white;
+    overflow: auto;
+    /*text-overflow: clip;*/
+}
+
+.child_div_1{
+    float:left;
+    margin-right:5px;
+}
