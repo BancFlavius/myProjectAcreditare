@@ -2,7 +2,9 @@
 <%
     HttpSession s = request.getSession();
     Object o = s.getAttribute("userid");
-    if(o==null)
+    Object o2 = s.getAttribute("admin");
+
+    if(o==null && o2==null)
     {
         response.sendRedirect("login.html");
     }

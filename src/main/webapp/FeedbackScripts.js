@@ -1,6 +1,7 @@
 function showFeedback (lista) {
     var randuri = "";
     lista.forEach(function (obiect) {
+        var deleteF = obiect.idfeedback;
         var style = "";
         if(obiect.feedbackType == 1){
             style = "style=\"background: green;\"";
@@ -8,7 +9,7 @@ function showFeedback (lista) {
             style = "style=\"background: red;\"";
         }
 
-        randuri += `<div class="page-block"><div class="cv-block" ${style} >
+        randuri += `<div class="page-block"><a href="feedback?action=delete&idfeedback=`+deleteF+`">X</a><div class="cv-block" ${style} >
         <div id="parent_div_1">
             Name: ${obiect.firstn}
             ${obiect.lastn}
@@ -32,7 +33,7 @@ function getListFeedback(cautaText) {
         }
     }).done(function (lista) {
         console.info("a venit lista", lista);
-        showFeedback(lista.intrebari);
+        showFeedback(lista.feedbacks);
     });
 }
 

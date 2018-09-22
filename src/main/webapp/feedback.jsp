@@ -40,6 +40,7 @@
             <input type="radio" name="utype" value="issue" required> Issue
         </div>
         <div style="text-align: center">
+            <input type="hidden" name="action" value="list">
             <input type="submit">
         </div>
     </form>

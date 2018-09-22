@@ -206,7 +206,7 @@ public class DataBaseMethods {
 
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            PreparedStatement pSt = conn.prepareStatement("SELECT feedback.id, feedback.idutilizator, feedback.mesaj, feedback.udate, utilizatori.lastn, utilizatori.firstn, feedback.utype FROM feedback,utilizatori WHERE utilizatori.id = ? AND feedback.idutilizator = ?");
+            PreparedStatement pSt = conn.prepareStatement("SELECT feedback.idf, feedback.idutilizator, feedback.mesaj, feedback.udate, utilizatori.lastn, utilizatori.firstn, feedback.utype FROM feedback,utilizatori WHERE utilizatori.id = ? AND feedback.idutilizator = ?");
             pSt.setLong(1, id);
             pSt.setLong(2, id);
 
@@ -224,7 +224,8 @@ public class DataBaseMethods {
                     p.firstn = firstn;
                     p.lastn = lastn;
                     p.date = date;
-                    p.setIdfeedback(rs.getLong("id"));
+                    p.setIduser(rs.getLong("idutilizator"));
+                    p.setIdfeedback(rs.getLong("idf"));
                     if(rs.getString("utype").equals("suggestion")){
                         p.setFeedbackType(1);
                     } else if(rs.getString("utype").equals("issue")){
@@ -257,7 +258,7 @@ public class DataBaseMethods {
 
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            PreparedStatement pSt = conn.prepareStatement("SELECT utilizatori.id, feedback.id, feedback.idutilizator, feedback.mesaj, feedback.udate, utilizatori.lastn, utilizatori.firstn, feedback.utype FROM feedback,utilizatori");
+            PreparedStatement pSt = conn.prepareStatement("SELECT utilizatori.id, feedback.idf, feedback.idutilizator, feedback.mesaj, feedback.udate, utilizatori.lastn, utilizatori.firstn, feedback.utype FROM feedback,utilizatori");
 
             ResultSet rs = pSt.executeQuery();
 
@@ -269,7 +270,8 @@ public class DataBaseMethods {
                     p.firstn = rs.getString("firstn");
                     p.lastn = rs.getString("lastn");
                     p.date = rs.getString("udate");
-                    p.setIdfeedback(rs.getLong("id"));
+                    p.setIduser(rs.getLong("idutilizator"));
+                    p.setIdfeedback(rs.getLong("idf"));
                     if(rs.getString("utype").equals("suggestion")){
                         p.setFeedbackType(1);
                     } else if(rs.getString("utype").equals("issue")){
@@ -304,7 +306,7 @@ public class DataBaseMethods {
 
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            PreparedStatement pSt = conn.prepareStatement("SELECT cv.id, cv.idutilizator, cv.question1, cv.question2, cv.question3, cv.question4, cv.question5, cv.question6, cv.udate, utilizatori.lastn, utilizatori.firstn FROM cv, utilizatori WHERE utilizatori.id = ? AND cv.idutilizator=?");
+            PreparedStatement pSt = conn.prepareStatement("SELECT cv.idc, cv.idutilizator, cv.question1, cv.question2, cv.question3, cv.question4, cv.question5, cv.question6, cv.udate, utilizatori.lastn, utilizatori.firstn, utilizatori.uadmin FROM cv, utilizatori WHERE utilizatori.id = ? AND cv.idutilizator=?");
             pSt.setLong(1, id);
             pSt.setLong(2, id);
 
@@ -321,7 +323,8 @@ public class DataBaseMethods {
                     p.q4 = rs.getString("question4");
                     p.q5 = rs.getString("question5");
                     p.q6 = rs.getString("question6");
-                    p.setIdcv(rs.getLong("id"));
+                    p.setIduser(rs.getLong("idutilizator"));
+                    p.setIdcv(rs.getLong("idc"));
                     p.setIsAdmin(rs.getLong("uadmin"));
 
 
@@ -353,14 +356,13 @@ public class DataBaseMethods {
 
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            PreparedStatement pSt = conn.prepareStatement("SELECT utilizatori.id, cv.id, cv.idutilizator, cv.question1, cv.question2, cv.question3, cv.question4, cv.question5, cv.question6, cv.udate, utilizatori.lastn, utilizatori.firstn, utilizatori.uadmin FROM cv, utilizatori");
+            PreparedStatement pSt = conn.prepareStatement("SELECT utilizatori.id, cv.idc, cv.idutilizator, cv.question1, cv.question2, cv.question3, cv.question4, cv.question5, cv.question6, cv.udate, utilizatori.lastn, utilizatori.firstn, utilizatori.uadmin FROM cv, utilizatori");
 
             ResultSet rs = pSt.executeQuery();
 
             while (rs.next()) {
-                System.out.println(rs.getString("firstn"));
+                System.out.println(rs.getLong("id")+"   which id is this");
                 if (rs.getLong("idutilizator") == rs.getLong("id")) {
-                    System.out.println("inside if");
                     Person p = new Person();
                     p.date = rs.getString("udate");
                     p.lastn = rs.getString("lastn");
@@ -371,7 +373,8 @@ public class DataBaseMethods {
                     p.setQ4(rs.getString("question4"));
                     p.setQ5(rs.getString("question5"));
                     p.setQ6(rs.getString("question6"));
-                    p.setIdcv(rs.getLong("id"));
+                    p.setIduser(rs.getLong("idutilizator"));
+                    p.setIdcv(rs.getLong("idc"));
                     p.setIsAdmin(rs.getLong("uadmin"));
 
                     PersonList.add(p);
@@ -400,7 +403,7 @@ public class DataBaseMethods {
 
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            PreparedStatement pSt = conn.prepareStatement("UPDATE cv SET question1=?, question2=?, question3=?, question4=?, question5=?, question6=? WHERE id=? ");
+            PreparedStatement pSt = conn.prepareStatement("UPDATE cv SET question1=?, question2=?, question3=?, question4=?, question5=?, question6=? WHERE idc=? ");
             pSt.setString(1, q1);
             pSt.setString(2, q2);
             pSt.setString(3, q3);
@@ -610,6 +613,104 @@ public class DataBaseMethods {
         }
     }
 
+    static void deleteFeedback(long id){
+        try {
+            Class.forName("org.postgresql.Driver");
+
+            final String URL = "jdbc:postgresql://54.93.65.5:5432/flavius8";
+            final String USERNAME = "fasttrackit_dev";
+            final String PASSWORD = "fasttrackit_dev";
+
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            PreparedStatement pSt = conn.prepareStatement("DELETE FROM feedback WHERE idf=?");
+            pSt.setLong(1, id);
+
+            pSt.executeUpdate();
+
+            pSt.close();
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    static void deleteUserFeedback(long id){
+        try {
+            Class.forName("org.postgresql.Driver");
+
+            final String URL = "jdbc:postgresql://54.93.65.5:5432/flavius8";
+            final String USERNAME = "fasttrackit_dev";
+            final String PASSWORD = "fasttrackit_dev";
+
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            PreparedStatement pSt = conn.prepareStatement("DELETE FROM feedback WHERE idutilizator=?");
+            pSt.setLong(1, id);
+
+            pSt.executeUpdate();
+
+            pSt.close();
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void deleteCV(long id){
+        try {
+            Class.forName("org.postgresql.Driver");
+
+            final String URL = "jdbc:postgresql://54.93.65.5:5432/flavius8";
+            final String USERNAME = "fasttrackit_dev";
+            final String PASSWORD = "fasttrackit_dev";
+
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            PreparedStatement pSt = conn.prepareStatement("DELETE  FROM cv WHERE idutilizator=?");
+            pSt.setLong(1, id);
+
+            pSt.executeUpdate();
+
+            pSt.close();
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void deleteUser(long id){
+        deleteUserFeedback(id);
+        deleteCV(id);
+        try {
+            Class.forName("org.postgresql.Driver");
+
+            final String URL = "jdbc:postgresql://54.93.65.5:5432/flavius8";
+            final String USERNAME = "fasttrackit_dev";
+            final String PASSWORD = "fasttrackit_dev";
+
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            PreparedStatement pSt = conn.prepareStatement("DELETE FROM utilizatori WHERE id=?");
+            pSt.setLong(1, id);
+
+            pSt.executeUpdate();
+
+            pSt.close();
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     static long toLong(Object o){
         String stringToConvert = String.valueOf(o);

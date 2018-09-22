@@ -10,11 +10,20 @@ public class Person {
     String firstn;
     String lastn;
     String date;
+    Long iduser;
     Long idcv;
     Long idfeedback;
     Long isAdmin;
     int feedbackType; //1 for suggestions 0 for issue
 
+
+    public Long getIduser() {
+        return iduser;
+    }
+
+    public void setIduser(Long iduser) {
+        this.iduser = iduser;
+    }
 
     public Long getIsAdmin() {
         return isAdmin;

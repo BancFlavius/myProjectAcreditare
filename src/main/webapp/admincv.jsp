@@ -2,7 +2,8 @@
 <%
     HttpSession s = request.getSession();
     Object o = s.getAttribute("userid");
-    if(o==null)
+    Object o2 = s.getAttribute("admin");
+    if(o==null && o2==null)
     {
         response.sendRedirect("login.html");
     }
@@ -33,7 +34,7 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="CVscripts.js"></script>
+<script src="AdminCVscripts.js"></script>
 
 </body>
 </html>

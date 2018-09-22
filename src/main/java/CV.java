@@ -9,7 +9,7 @@ import java.io.IOException;
 public class CV extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+    protected void service(HttpServletRequest req, HttpServletResponse resp){
         String q1 = req.getParameter("question1");
         String q2 = req.getParameter("question2");
         String q3 = req.getParameter("question3");
@@ -24,9 +24,11 @@ public class CV extends HttpServlet {
         Object o = session.getAttribute("userid");
 
         try {
-            if(o==null){
+            if(o==null) {
                 System.out.println("CVServlet: object is null, redirecting");
                 resp.sendRedirect("cv.jsp");
+            } else if(action!=null && action.equals("delete")){
+                deleteAction(req,resp);
             } else {
                 if(action!= null && action.equals(UPDATE)){
                     dbm.updateCV(dbm.hasCV(o), q1, q2, q3, q4, q5, q6);
@@ -36,6 +38,21 @@ public class CV extends HttpServlet {
                     resp.sendRedirect("cv.jsp");
                 }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteAction(HttpServletRequest request, HttpServletResponse response) {
+
+        HttpSession session = request.getSession(true);
+
+        String idS = request.getParameter("iduser");
+        int id = Integer.parseInt(idS);
+
+        DataBaseMethods.deleteUser(id);
+        try {
+            response.sendRedirect("admincv.jsp");
         } catch (IOException e) {
             e.printStackTrace();
         }

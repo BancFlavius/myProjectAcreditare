@@ -2,7 +2,8 @@ function showCV (lista) {
     var randuri = "";
     lista.forEach(function (object) {
         var iduser = object.iduser;
-        randuri += `<div class="page-block"><div class="cv-block">
+        var deleteF = '<a href="cv?action=delete&iduser='+iduser+'">X</a>';
+        randuri += `<div class="page-block">`+deleteF+`<div class="cv-block">
         <div id="parent_div_1">
             Name: ${object.firstn}
             ${object.lastn}
@@ -32,41 +33,10 @@ function getListCV(cautaText) {
     }).done(function (lista) {
         console.info("a venit lista", lista);
         showCV(lista.cvs);
-        editText();
     });
 }
 
 
 getListCV();
 var sortareaAnterioara = 'asc';
-
-
-
-function editText() {
-        var div = document.getElementsByClassName("editable");
-
-        for(var i = (div.length - 1); i >= 0; i--) {
-            $('div').on('keydown', function(event) {
-                if($(this).text().length === 450 && event.keyCode != 8) {
-                    event.preventDefault();
-                }
-            });
-
-            if (div[i] != null) {
-
-                div[i].onclick = function (e) {
-                    this.contentEditable = true;
-                    this.focus();
-                    this.style.backgroundColor = '#E0E0E0';
-                    this.style.border = '1px dotted black';
-
-                }
-
-                div[i].onmouseout = function () {
-                    this.contentEditable = false;
-                }
-            }
-        }
-}
-
 
