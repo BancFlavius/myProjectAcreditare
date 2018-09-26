@@ -1,14 +1,8 @@
-function showFeedback (lista) {
-    $(document).ready(function(){
-        $("button").click(function(){
-            $("#div1").fadeToggle("slow");
-        });
-    });
-    var randuri = "";
+function showFeedback (list) {
+    var lines = "<div class=\"page-block\">";
     var counter = 0;
-    lista.forEach(function (obiect) {
+    list.forEach(function (obiect) {
         counter++;
-        var deleteF = obiect.idfeedback;
         var style = "";
         if(obiect.feedbackType == 1){
             style = "style=\"background: green;\"";
@@ -16,7 +10,7 @@ function showFeedback (lista) {
             style = "style=\"background: red;\"";
         }
 
-        randuri += `<div class="page-block"><div style="text-align: right"><a href="feedback?action=delete&idfeedback=`+deleteF+`">X</a></div><div class="cv-block" ${style} >
+        lines += `<div style="text-align: right"><a href="feedback?action=delete&idfeedback=`+obiect.idfeedback+`">X</a></div><div class="cv-block" ${style} >
         <div id="parent_div_1">
             Name: ${obiect.firstn}
             ${obiect.lastn}
@@ -27,20 +21,25 @@ function showFeedback (lista) {
         </div>
         <div class="message_div"><p>${obiect.message}</p></div>
     </div>
-    <button>Contact</button>
-    <div id="div1" style="display: none">
+    <button class="button`+ obiect.idfeedback +`">Contact</button>
+    <div id="div`+ obiect.idfeedback +`" style="display: none">
       <form action="contact" method="post">
         <textarea name="message" id="umessage" cols="30" rows="10" maxlength="450" placeholder="Type your message here..." style="height:115px;width: 620px"></textarea>
         <input type="hidden" name="email" id="umail" value="`+obiect.email+`">
         <input type="hidden" name="action" value="feedback">
-        <div><input type="submit" value="Send Email"></div>
+        <div><button type="submit">Send Email</button></div>
       </form>
     </div>
-    </div>`;
-    }); if(counter==0){
-        randuri+= `<div class="page-block">No feedbacks to review.</div>`;
+    <hr>
+    `;
+
+    });lines += `</div>`;
+    if(counter==0){
+        lines = "";
+        lines+= `<div class="page-block">No feedbacks to review.</div>`;
     }
-    $("#obiect").html(randuri);}
+
+    $("#obiect").html(lines);}
 
 
 function getListFeedback(cautaText) {
@@ -50,9 +49,12 @@ function getListFeedback(cautaText) {
         data: {
             search: cautaText
         }
-    }).done(function (lista) {
-        console.info("a venit lista", lista);
-        showFeedback(lista.feedbacks);
+    }).done(function (list) {
+        console.info("a venit list", list);
+        showFeedback(list.feedbacks);
+        $('button').click(function(){
+            $(this).next().fadeToggle("slow");
+        })
     });
 }
 

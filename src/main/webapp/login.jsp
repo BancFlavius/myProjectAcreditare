@@ -24,7 +24,10 @@
         <li><a href="home.jsp">Home</a></li>
         <li><a href="cv.jsp">CV</a></li>
         <li><a href="feedback.jsp">Feedback</a></li>
-        <li><a href="">Contact</a></li>
+        <li><a style="cursor: default"><div class="dropdown">Contact <div class="dropdown-content">
+            <div class="desc">For any business inquires or additional information please contact us at:<br>
+                Phone number: <font color="#9370db">+407321312</font> <br>
+                E-mail: <font color="#9370db">myappacreditare@gmail.com</font></div></div></div></a></li>
 
         <ol>
             <li><a href="register.jsp">Sign Up</a></li>

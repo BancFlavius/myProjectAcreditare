@@ -19,7 +19,7 @@ function showCV (lista) {
         <div class="message_div">Foreign languages: <p class='editable'>${object.q4}</p></div><hr>
         <div class="message_div">Skills: <p class='editable'>${object.q5}</p></div><hr>
         <div class="message_div">Other info: <p class='editable'>${object.q6}</p></div>
-        </div><div style="font-weight: 900;">Click <a href="admincv.jsp" style="color:mediumpurple">here</a>to see all the sent CVs.</div></div>`;
+        </div><div style="font-weight: 900;">Click <a href="admincv.jsp" style="color:mediumpurple">here</a> to see all the sent CVs.</div></div>`;
     }
     });
     $("#object").html(randuri);}
@@ -47,7 +47,7 @@ function showFeedback (lista) {
             Date: ${obiect.date}
         </div>
         <div class="message_div"><p>${obiect.message}</p></div>
-    </div><div style="font-weight: 900;">Click <a href="adminfeedback.jsp" style="color:mediumpurple">here</a>to see all the sent feedbacks.</div></div>`;
+    </div><div style="font-weight: 900;">Click <a href="adminfeedback.jsp" style="color:mediumpurple">here</a> to see all the sent feedbacks.</div></div>`;
     }
     });
     $("#obiect").html(randuri);}

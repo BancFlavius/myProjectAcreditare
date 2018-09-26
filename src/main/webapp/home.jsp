@@ -37,7 +37,18 @@
 
 <div class="page-block">
 <%--information about the company--%>
-    About us
+    <p>Our Company is a UK based limited company which has recruited the best
+    experienced agents and is run by two experienced directors who have established
+    themselves in the UK education market working with many top universities and language
+    schools.</p>
+    <p>All of our staff have come from either working independently as agents or worked for other
+    agencies in the UK or elsewhere in the world and now work under the umbrella of World
+    Choice Education only.</p>
+    <p>The core of our business is to introduce international students to the UK and other
+    worldwide destinations which include, the USA, Australia, New Zealand, Canada and China
+    to study at a University or a Language School.</p>
+    <p>We currently work in the following countries, and have staff who divide their time between
+    these countries and our UK office.</p>
 </div>
 
 <%

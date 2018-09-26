@@ -19,6 +19,7 @@ public class Register extends HttpServlet {
             String first = req.getParameter("first");
             String last = req.getParameter("last");
             String password = req.getParameter("password");
+            String password2 = req.getParameter("password2");
             String email = req.getParameter("email");
             String age = req.getParameter("age");
             HttpSession session = req.getSession();
@@ -32,7 +33,7 @@ public class Register extends HttpServlet {
                         session.removeAttribute("userid");
                         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(back);
                         dispatcher.forward(req, resp);
-                    } else {
+                    } else if (!isEmpty(password) || !isEmpty(password2) || password.equals(password2)){
                         dbm.register(first, last, password, email, age);
                         System.out.println("creating new user");
                         dbm.login(email, password);
