@@ -6,7 +6,7 @@
 
     if(o==null && o2==null)
     {
-        response.sendRedirect("login.html");
+        response.sendRedirect("login.jsp");
     }
 %>
 
@@ -36,9 +36,8 @@
     </div>
 
 
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="FeedbackScripts.js"></script>
+<script src="AdminFeedbackScripts.js"></script>
 
 </body>
 </html>

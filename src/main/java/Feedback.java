@@ -48,7 +48,11 @@ public class Feedback extends HttpServlet {
 
         DataBaseMethods.deleteFeedback(id);
         try {
-            response.sendRedirect("feedback.jsp");
+            if(session.getAttribute("admin") != null){
+                response.sendRedirect("adminfeedback.jsp");
+            } else {
+                response.sendRedirect("feedback.jsp");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -28,20 +28,19 @@ public class LogIn extends HttpServlet {
                     long value = dbm.login(email, password);
 
                     if (value != -1) {
-                        if(dbm.admin((int)value)) {
+                        if(dbm.isAdmin((int)value)) {
                             System.out.println("admin logging in");
 
                             HttpSession session = req.getSession();
                             session.setAttribute("userid", value);
-
+                            if(dbm.isVerified(email)) session.setAttribute("verified", 1);
+                            session.setAttribute("admin", 1);
                             resp.sendRedirect("adminhome.jsp");
                         } else {
                             System.out.println("logging in");
 
                             HttpSession session = req.getSession();
                             session.setAttribute("userid", value);
-                            if(dbm.admin(value)) session.setAttribute("admin", 1);
-                            if(dbm.isVerified(value)) session.setAttribute("verified", 1);
                             resp.sendRedirect("home.jsp");
                         }
 

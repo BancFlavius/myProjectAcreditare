@@ -8,6 +8,10 @@ textarea {
     resize: none;
 }
 
+document {
+    display: none;
+}
+
 .cv-block {
     text-align: left;
     background: #c0c0c0;

@@ -37,23 +37,4 @@ function getListFeedback(cautaText) {
     });
 }
 
-getListFeedback('asc');
-
-
-function sorteazaNume(th){
-    if(sortareaAnterioara == "asc"){
-        cereLista();
-        th.innerHTML = "obiecte &uArr;";
-        sortareaAnterioara = "desc";
-    } else {
-        cereLista();
-        th.innerHTML = "obiecte &dArr;";
-        sortareaAnterioara = "asc";
-    }
-}
-
-
-function cauta(cautaText) {
-    console.info("cauta ", cautaText);
-    cereLista(sortareaAnterioara, cautaText);
-}
+getListFeedback();

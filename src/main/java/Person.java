@@ -10,12 +10,21 @@ public class Person {
     String firstn;
     String lastn;
     String date;
+    String email;
     Long iduser;
     Long idcv;
     Long idfeedback;
     Long isAdmin;
     int feedbackType; //1 for suggestions 0 for issue
 
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Long getIduser() {
         return iduser;

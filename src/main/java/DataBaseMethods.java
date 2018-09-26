@@ -163,7 +163,7 @@ public class DataBaseMethods {
     }
 
 
-    static boolean admin(long id){
+    static boolean isAdmin(long id){
         boolean admin = false;
         try {
 
@@ -206,7 +206,7 @@ public class DataBaseMethods {
 
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            PreparedStatement pSt = conn.prepareStatement("SELECT feedback.idf, feedback.idutilizator, feedback.mesaj, feedback.udate, utilizatori.lastn, utilizatori.firstn, feedback.utype FROM feedback,utilizatori WHERE utilizatori.id = ? AND feedback.idutilizator = ?");
+            PreparedStatement pSt = conn.prepareStatement("SELECT utilizatori.email, feedback.idf, feedback.idutilizator, feedback.mesaj, feedback.udate, utilizatori.lastn, utilizatori.firstn, feedback.utype FROM feedback,utilizatori WHERE utilizatori.id = ? AND feedback.idutilizator = ?");
             pSt.setLong(1, id);
             pSt.setLong(2, id);
 
@@ -231,6 +231,8 @@ public class DataBaseMethods {
                     } else if(rs.getString("utype").equals("issue")){
                         p.setFeedbackType(0);
                     }
+                    p.setEmail(rs.getString("email"));
+
                     PersonList.add(p);
                 }
             }
@@ -258,7 +260,7 @@ public class DataBaseMethods {
 
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            PreparedStatement pSt = conn.prepareStatement("SELECT utilizatori.id, feedback.idf, feedback.idutilizator, feedback.mesaj, feedback.udate, utilizatori.lastn, utilizatori.firstn, feedback.utype FROM feedback,utilizatori");
+            PreparedStatement pSt = conn.prepareStatement("SELECT utilizatori.email, utilizatori.id, feedback.idf, feedback.idutilizator, feedback.mesaj, feedback.udate, utilizatori.lastn, utilizatori.firstn, feedback.utype FROM feedback,utilizatori");
 
             ResultSet rs = pSt.executeQuery();
 
@@ -277,6 +279,7 @@ public class DataBaseMethods {
                     } else if(rs.getString("utype").equals("issue")){
                         p.setFeedbackType(0);
                     }
+                    p.setEmail(rs.getString("email"));
 
                     PersonList.add(p);
                 }
@@ -306,7 +309,7 @@ public class DataBaseMethods {
 
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            PreparedStatement pSt = conn.prepareStatement("SELECT cv.idc, cv.idutilizator, cv.question1, cv.question2, cv.question3, cv.question4, cv.question5, cv.question6, cv.udate, utilizatori.lastn, utilizatori.firstn, utilizatori.uadmin FROM cv, utilizatori WHERE utilizatori.id = ? AND cv.idutilizator=?");
+            PreparedStatement pSt = conn.prepareStatement("SELECT utilizatori.email, cv.idc, cv.idutilizator, cv.question1, cv.question2, cv.question3, cv.question4, cv.question5, cv.question6, cv.udate, utilizatori.lastn, utilizatori.firstn, utilizatori.uadmin FROM cv, utilizatori WHERE utilizatori.id = ? AND cv.idutilizator=?");
             pSt.setLong(1, id);
             pSt.setLong(2, id);
 
@@ -326,7 +329,7 @@ public class DataBaseMethods {
                     p.setIduser(rs.getLong("idutilizator"));
                     p.setIdcv(rs.getLong("idc"));
                     p.setIsAdmin(rs.getLong("uadmin"));
-
+                    p.setEmail(rs.getString("email"));
 
                     PersonList.add(p);
                 }
@@ -356,12 +359,11 @@ public class DataBaseMethods {
 
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            PreparedStatement pSt = conn.prepareStatement("SELECT utilizatori.id, cv.idc, cv.idutilizator, cv.question1, cv.question2, cv.question3, cv.question4, cv.question5, cv.question6, cv.udate, utilizatori.lastn, utilizatori.firstn, utilizatori.uadmin FROM cv, utilizatori");
+            PreparedStatement pSt = conn.prepareStatement("SELECT utilizatori.email, utilizatori.id, cv.idc, cv.idutilizator, cv.question1, cv.question2, cv.question3, cv.question4, cv.question5, cv.question6, cv.udate, utilizatori.lastn, utilizatori.firstn, utilizatori.uadmin FROM cv, utilizatori");
 
             ResultSet rs = pSt.executeQuery();
 
             while (rs.next()) {
-                System.out.println(rs.getLong("id")+"   which id is this");
                 if (rs.getLong("idutilizator") == rs.getLong("id")) {
                     Person p = new Person();
                     p.date = rs.getString("udate");
@@ -376,6 +378,7 @@ public class DataBaseMethods {
                     p.setIduser(rs.getLong("idutilizator"));
                     p.setIdcv(rs.getLong("idc"));
                     p.setIsAdmin(rs.getLong("uadmin"));
+                    p.setEmail(rs.getString("email"));
 
                     PersonList.add(p);
                 }
@@ -482,7 +485,7 @@ public class DataBaseMethods {
 
         List PersonList;
 
-        if(admin(id)){
+        if(isAdmin(id)){
             PersonList = getFeedback();
         } else{
             PersonList = getFeedback(id);
@@ -509,7 +512,7 @@ public class DataBaseMethods {
 
         List PersonList;
 
-        if(admin(id)){
+        if(isAdmin(id)){
             PersonList = getCV();
         } else {
             PersonList  = getCV(id);
@@ -557,7 +560,7 @@ public class DataBaseMethods {
         return id;
     }
 
-    static boolean isVerified(long id){
+    static boolean isVerified(String email){
         boolean verified = false;
 
         try {
@@ -569,8 +572,8 @@ public class DataBaseMethods {
 
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            PreparedStatement pSt = conn.prepareStatement("SELECT verified FROM utilizatori WHERE id=?");
-            pSt.setLong(1, id);
+            PreparedStatement pSt = conn.prepareStatement("SELECT verified FROM utilizatori WHERE email=?");
+            pSt.setString(1, email);
 
             ResultSet rs = pSt.executeQuery();
 

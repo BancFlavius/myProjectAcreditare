@@ -5,7 +5,7 @@
     Object o2 = s.getAttribute("admin");
     if(o==null && o2==null)
     {
-        response.sendRedirect("login.html");
+        response.sendRedirect("login.jsp");
     }
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

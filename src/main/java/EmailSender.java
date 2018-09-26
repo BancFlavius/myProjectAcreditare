@@ -6,8 +6,8 @@ import java.util.Properties;
 public class EmailSender {
 
     public static void send(String to, String subject, String text) throws MessagingException {
-        String senderEmail = "calinveltan8@gmail.com";
-        String senderPassword = "calin4321";
+        String senderEmail = "myappacreditare@gmail.com";
+        String senderPassword = "myapp1234";
 
         Properties props = new Properties();
         props.put("mail.smtp.starttls.enable", "true");

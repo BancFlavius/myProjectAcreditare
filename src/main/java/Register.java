@@ -35,7 +35,7 @@ public class Register extends HttpServlet {
                     } else {
                         dbm.register(first, last, password, email, age);
                         System.out.println("creating new user");
-                        int value = (int)dbm.login(email, password);
+                        dbm.login(email, password);
                         session.setAttribute("verified", null);
 
 

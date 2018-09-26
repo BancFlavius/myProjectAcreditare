@@ -13,15 +13,8 @@ public class FeedbackGet extends HttpServlet {
         String action = req.getParameter("action");
         final String LIST = "list";
 
-        try {
             if (action != null && action.equals(LIST)) {
                 DataBaseMethods.listActionFeedback(req, resp);
-                resp.sendRedirect("feedback.jsp");
-            } else {
-                resp.sendRedirect("feedback.jsp");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
