@@ -27,8 +27,12 @@ public class CV extends HttpServlet {
             if(o==null) {
                 System.out.println("CVServlet: object is null, redirecting");
                 resp.sendRedirect("cv.jsp");
-            } else if(action!=null && action.equals("delete")){
-                deleteAction(req,resp);
+            } else if(action!=null && action.equals("delete")) {
+                deleteAction(req, resp);
+            } else if(action!=null && action.equals("update")){
+                long id = dbm.toLong(o);
+                dbm.updateCV(id, q1, q2, q3, q4, q5, q6);
+                resp.sendRedirect("cv.jsp");
             } else {
                 if(action!= null && action.equals(UPDATE)){
                     dbm.updateCV(dbm.hasCV(o), q1, q2, q3, q4, q5, q6);

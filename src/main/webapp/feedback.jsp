@@ -23,7 +23,10 @@
         <li><a href="home.jsp">Home</a></li>
         <li><a href="cv.jsp">CV</a></li>
         <li><a href="feedback.jsp">Feedback</a></li>
-        <li><a href="">Contact</a></li>
+        <li><a style="cursor: default"><div class="dropdown">Contact <div class="dropdown-content">
+            <div class="desc">For any business inquires or additional information please contact us at:<br>
+                Phone number: <font color="#9370db">+407321312</font> <br>
+                E-mail: <font color="#9370db">myappacreditare@gmail.com</font></div></div></div></a></li>
 
         <ol>
             <li><a href="signout">Sign Out</a></li>
@@ -35,13 +38,13 @@
     <h2>Send feedback</h2>
     <form action="feedback" method="POST">
         <textarea name="message" id="umessage" cols="30" rows="10" maxlength="1000" placeholder="Type your message here..." required="required" style="height:200px;width: 700px"></textarea>
-        <div style="text-align-all: center; padding-right: 50px">
-            Suggestion<input type="radio" name="utype" value="suggestion" required>
-            <input type="radio" name="utype" value="issue" required> Issue
+        <div style="text-align-all: center">
+           <div><input class="css-checkbox" type="radio" name="utype" id="suggestion" value="suggestion" required> <label class="css-label" for="suggestion">Suggestion</label>
+         <input class="css-checkbox" type="radio" name="utype" value="issue" id="issue" required> <label class="css-label" for="issue">Issue</label></div>
         </div>
-        <div style="text-align: center">
+        <div>
             <input type="hidden" name="action" value="list">
-            <input type="submit">
+            <button type="submit">Send</button>
         </div>
     </form>
 </div>

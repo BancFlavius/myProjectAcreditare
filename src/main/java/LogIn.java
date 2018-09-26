@@ -40,6 +40,7 @@ public class LogIn extends HttpServlet {
                             System.out.println("logging in");
 
                             HttpSession session = req.getSession();
+                            if(dbm.isVerified(email)) session.setAttribute("verified", 1);
                             session.setAttribute("userid", value);
                             resp.sendRedirect("home.jsp");
                         }

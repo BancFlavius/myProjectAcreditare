@@ -214,10 +214,10 @@ public class DataBaseMethods {
 
             while (rs.next()){
                 if(rs.getLong("idutilizator") == id){
-                    String umessage = rs.getString("mesaj");
-                    String firstn = rs.getString("firstn");
-                    String lastn = rs.getString("lastn");
-                    String date = rs.getString("udate");
+                    String umessage = rs.getString("mesaj").trim();
+                    String firstn = rs.getString("firstn").trim();
+                    String lastn = rs.getString("lastn").trim();
+                    String date = rs.getString("udate").trim();
 
                     Person p = new Person();
                     p.message = umessage;
@@ -226,12 +226,12 @@ public class DataBaseMethods {
                     p.date = date;
                     p.setIduser(rs.getLong("idutilizator"));
                     p.setIdfeedback(rs.getLong("idf"));
-                    if(rs.getString("utype").equals("suggestion")){
+                    if(rs.getString("utype").trim().equals("suggestion")){
                         p.setFeedbackType(1);
-                    } else if(rs.getString("utype").equals("issue")){
+                    } else if(rs.getString("utype").trim().equals("issue")){
                         p.setFeedbackType(0);
                     }
-                    p.setEmail(rs.getString("email"));
+                    p.setEmail(rs.getString("email").trim());
 
                     PersonList.add(p);
                 }
@@ -268,18 +268,18 @@ public class DataBaseMethods {
                 if (rs.getLong("idutilizator") == rs.getLong("id")) {
                     Person p = new Person();
 
-                    p.message = rs.getString("mesaj");
-                    p.firstn = rs.getString("firstn");
-                    p.lastn = rs.getString("lastn");
-                    p.date = rs.getString("udate");
+                    p.message = rs.getString("mesaj").trim();
+                    p.firstn = rs.getString("firstn").trim();
+                    p.lastn = rs.getString("lastn").trim();
+                    p.date = rs.getString("udate").trim();
                     p.setIduser(rs.getLong("idutilizator"));
                     p.setIdfeedback(rs.getLong("idf"));
-                    if(rs.getString("utype").equals("suggestion")){
+                    if(rs.getString("utype").trim().equals("suggestion")){
                         p.setFeedbackType(1);
-                    } else if(rs.getString("utype").equals("issue")){
+                    } else if(rs.getString("utype").trim().equals("issue")){
                         p.setFeedbackType(0);
                     }
-                    p.setEmail(rs.getString("email"));
+                    p.setEmail(rs.getString("email").trim());
 
                     PersonList.add(p);
                 }
@@ -317,19 +317,19 @@ public class DataBaseMethods {
             while (rs.next()) {
                 if (rs.getLong("idutilizator") == id) {
                     Person p = new Person();
-                    p.date = rs.getString("udate");
-                    p.lastn = rs.getString("lastn");
-                    p.firstn = rs.getString("firstn");
-                    p.q1 = rs.getString("question1");
-                    p.q2 = rs.getString("question2");
-                    p.q3 = rs.getString("question3");
-                    p.q4 = rs.getString("question4");
-                    p.q5 = rs.getString("question5");
-                    p.q6 = rs.getString("question6");
+                    p.date = rs.getString("udate").trim();
+                    p.lastn = rs.getString("lastn").trim();
+                    p.firstn = rs.getString("firstn").trim();
+                    p.q1 = rs.getString("question1").trim();
+                    p.q2 = rs.getString("question2").trim();
+                    p.q3 = rs.getString("question3").trim();
+                    p.q4 = rs.getString("question4").trim();
+                    p.q5 = rs.getString("question5").trim();
+                    p.q6 = rs.getString("question6").trim();
                     p.setIduser(rs.getLong("idutilizator"));
                     p.setIdcv(rs.getLong("idc"));
                     p.setIsAdmin(rs.getLong("uadmin"));
-                    p.setEmail(rs.getString("email"));
+                    p.setEmail(rs.getString("email").trim());
 
                     PersonList.add(p);
                 }
@@ -366,19 +366,19 @@ public class DataBaseMethods {
             while (rs.next()) {
                 if (rs.getLong("idutilizator") == rs.getLong("id")) {
                     Person p = new Person();
-                    p.date = rs.getString("udate");
-                    p.lastn = rs.getString("lastn");
-                    p.firstn = rs.getString("firstn");
-                    p.setQ1(rs.getString("question1"));
-                    p.setQ2(rs.getString("question2"));
-                    p.setQ3(rs.getString("question3"));
-                    p.setQ4(rs.getString("question4"));
-                    p.setQ5(rs.getString("question5"));
-                    p.setQ6(rs.getString("question6"));
+                    p.date = rs.getString("udate").trim();
+                    p.lastn = rs.getString("lastn").trim();
+                    p.firstn = rs.getString("firstn").trim();
+                    p.setQ1(rs.getString("question1").trim());
+                    p.setQ2(rs.getString("question2").trim());
+                    p.setQ3(rs.getString("question3").trim());
+                    p.setQ4(rs.getString("question4").trim());
+                    p.setQ5(rs.getString("question5").trim());
+                    p.setQ6(rs.getString("question6").trim());
                     p.setIduser(rs.getLong("idutilizator"));
                     p.setIdcv(rs.getLong("idc"));
                     p.setIsAdmin(rs.getLong("uadmin"));
-                    p.setEmail(rs.getString("email"));
+                    p.setEmail(rs.getString("email").trim());
 
                     PersonList.add(p);
                 }
@@ -406,7 +406,7 @@ public class DataBaseMethods {
 
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            PreparedStatement pSt = conn.prepareStatement("UPDATE cv SET question1=?, question2=?, question3=?, question4=?, question5=?, question6=? WHERE idc=? ");
+            PreparedStatement pSt = conn.prepareStatement("UPDATE cv SET question1=?, question2=?, question3=?, question4=?, question5=?, question6=? WHERE idutilizator=? ");
             pSt.setString(1, q1);
             pSt.setString(2, q2);
             pSt.setString(3, q3);

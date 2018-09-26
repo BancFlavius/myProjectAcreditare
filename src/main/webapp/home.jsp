@@ -1,3 +1,4 @@
+<%@ page import="java.sql.*" %>
 <%
 
     HttpSession s = request.getSession();
@@ -7,7 +8,7 @@
     if(o==null || o2==null)
     {
         response.sendRedirect("login.jsp");
-    }
+    }else if(o!=null){
 %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -23,7 +24,10 @@
         <li><a href="home.jsp">Home</a></li>
         <li><a href="cv.jsp">CV</a></li>
         <li><a href="feedback.jsp">Feedback</a></li>
-        <li><a href="">Contact</a></li>
+        <li><a style="cursor: default"><div class="dropdown">Contact <div class="dropdown-content">
+            <div class="desc">For any business inquires or additional information please contact us at:<br>
+                Phone number: <font color="#9370db">+407321312</font> <br>
+                E-mail: <font color="#9370db">myappacreditare@gmail.com</font></div></div></div></a></li>
 
         <ol>
             <li><a href="signout">Sign Out</a></li>
@@ -32,12 +36,106 @@
 </div>
 
 <div class="page-block">
-<%--profile info like name, where the person lives and education--%>
+<%--information about the company--%>
+    About us
 </div>
 
+<%
+    String stringToConvert = String.valueOf(o);
+    Long convertedLong = Long.parseLong(stringToConvert);
+    boolean found = false;
+    try {
+        Class.forName("org.postgresql.Driver");
+
+        final String URL = "jdbc:postgresql://54.93.65.5:5432/flavius8";
+        final String USERNAME = "fasttrackit_dev";
+        final String PASSWORD = "fasttrackit_dev";
+
+        Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+        PreparedStatement pSt = conn.prepareStatement("SELECT idutilizator FROM cv WHERE idutilizator=?");
+        pSt.setLong(1, convertedLong);
+
+        ResultSet rs = pSt.executeQuery();
+
+        while (rs.next()){
+            if(rs.getLong("idutilizator") == convertedLong) found = true;
+        }
+    } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    if(!found){
+%>
 <div class="page-block">
-    <h2 style="text-align: left; padding-left: 5%">CV</h2>
+    You didn't complete your CV. <br>
+    You can submit it by clicking <a href="cv.jsp" style="color: mediumpurple">here.</a>
 </div>
+<%
+} else {
+%>
+
+<div id="object">
+
+</div>
+
+<%
+    }
+    }
+%>
+
+
+<%
+    String stringToConvert = String.valueOf(o);
+    Long convertedLong = Long.parseLong(stringToConvert);
+    boolean found = false;
+    try {
+        Class.forName("org.postgresql.Driver");
+
+        final String URL = "jdbc:postgresql://54.93.65.5:5432/flavius8";
+        final String USERNAME = "fasttrackit_dev";
+        final String PASSWORD = "fasttrackit_dev";
+
+        Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+        PreparedStatement pSt = conn.prepareStatement("SELECT idutilizator FROM feedback WHERE idutilizator=?");
+        pSt.setLong(1, convertedLong);
+
+        ResultSet rs = pSt.executeQuery();
+
+        while (rs.next()){
+            if(rs.getLong("idutilizator") == convertedLong) found = true;
+        }
+    } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    if(!found){
+%>
+
+<div class="page-block">
+    If you have any suggestion or issue you would like to make us aware of, please send it <a href="feedback.jsp" style="color: mediumpurple">here.</a>
+</div>
+
+<%
+} else {
+%>
+
+<div id="obiect">
+
+</div>
+
+<%
+    }
+%>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="HomeScripts.js"></script>
+
 
 </body>
 </html>

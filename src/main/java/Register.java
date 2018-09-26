@@ -28,7 +28,7 @@ public class Register extends HttpServlet {
                     DataBaseMethods dbm = new DataBaseMethods();
                     if(dbm.exists(email)) {
                         System.out.println("RegisterServlet: email already exists");
-                        String back = "/register.html";
+                        String back = "/register.jsp";
                         session.removeAttribute("userid");
                         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(back);
                         dispatcher.forward(req, resp);
@@ -55,7 +55,7 @@ public class Register extends HttpServlet {
                         resp.sendRedirect("login.jsp");
                     }
                 } else  { System.out.println("RegisterServlet: registration failed");
-                    String back = "/register.html";
+                    String back = "/register.jsp";
                     session.removeAttribute("userid");
                     RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(back);
                     dispatcher.forward(req, resp);

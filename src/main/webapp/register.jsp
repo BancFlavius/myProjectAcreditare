@@ -49,7 +49,7 @@
             <input type="hidden" name="action" value="register">
         </div>
         <div>
-            <input type="submit">
+            <button type="submit">Register</button>
         </div>
     </form>
 

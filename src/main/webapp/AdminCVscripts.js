@@ -5,8 +5,10 @@ function showCV (lista) {
         });
     });
     var randuri = "";
+    var counter = 0;
     lista.forEach(function (object) {
         var iduser = object.iduser;
+        counter++;
         var deleteF = '<div style="text-align: right"><a href="cv?action=delete&iduser='+iduser+'">X</a></div>';
         randuri += `<div class="page-block">`+deleteF+`<div class="cv-block">
         <div id="parent_div_1">
@@ -30,12 +32,12 @@ function showCV (lista) {
         <textarea name="message" id="umessage" cols="30" rows="10" maxlength="450" placeholder="Type your message here..." style="height:115px;width: 620px"></textarea>
         <input type="hidden" name="email" id="umail" value="`+object.email+`">
         <input type="hidden" name="action" value="cv">
-        <div><input type="submit" value="Send Email"></div>
+        <div><button type="submit">Send Email</button></div>
       </form>
      </div>
     </div>`;
-
-    });
+    });if(counter==0){
+        randuri+= `<div class="page-block">No feedbacks to review.</div>`;}
     $("#object").html(randuri);}
 
 function getListCV(cautaText) {

@@ -9,7 +9,7 @@ function showFeedback (lista) {
             style = "style=\"background: red;\"";
         }
 
-        randuri += `<div class="page-block"><a href="feedback?action=delete&idfeedback=`+deleteF+`">X</a><div class="cv-block" ${style} >
+        randuri += `<div class="page-block"><div style="text-align: right"><a href="feedback?action=delete&idfeedback=`+deleteF+`">X</a></div><div class="cv-block" ${style} >
         <div id="parent_div_1">
             Name: ${obiect.firstn}
             ${obiect.lastn}

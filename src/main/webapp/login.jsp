@@ -27,7 +27,7 @@
         <li><a href="">Contact</a></li>
 
         <ol>
-            <li><a href="register.html">Sign Up</a></li>
+            <li><a href="register.jsp">Sign Up</a></li>
         </ol>
     </ul>
 </div>
@@ -45,11 +45,11 @@
             <input type="hidden" name="action" value="login">
         </div>
         <div>
-            <input type="submit">
+            <button type="submit">Log In</button>
         </div>
     </form>
 
-    <p style="font-size:13px">Don't have an account? <a href="register.html">Register</a></p>
+    <p style="font-size:13px">Don't have an account? <a href="register.jsp">Register</a></p>
 </div>
 
 </body>

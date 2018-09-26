@@ -5,7 +5,9 @@ function showFeedback (lista) {
         });
     });
     var randuri = "";
+    var counter = 0;
     lista.forEach(function (obiect) {
+        counter++;
         var deleteF = obiect.idfeedback;
         var style = "";
         if(obiect.feedbackType == 1){
@@ -35,7 +37,9 @@ function showFeedback (lista) {
       </form>
     </div>
     </div>`;
-    });
+    }); if(counter==0){
+        randuri+= `<div class="page-block">No feedbacks to review.</div>`;
+    }
     $("#obiect").html(randuri);}
 
 

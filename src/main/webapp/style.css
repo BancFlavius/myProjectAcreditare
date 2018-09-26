@@ -8,9 +8,118 @@ textarea {
     resize: none;
 }
 
-document {
-    display: none;
+a {
+    color: mediumpurple;
+    padding-right: 0;
 }
+
+button {
+    -moz-box-shadow:inset 0px 1px 3px 0px #ac08dd;
+    -webkit-box-shadow:inset 0px 1px 3px 0px #ac08dd;
+    box-shadow:inset 0px 1px 3px 0px #ac08dd;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7a3978), color-stop(1, #560f7a));
+    background:-moz-linear-gradient(top, #7a3978 5%, #560f7a 100%);
+    background:-webkit-linear-gradient(top, #7a3978 5%, #560f7a 100%);
+    background:-o-linear-gradient(top, #7a3978 5%, #560f7a 100%);
+    background:-ms-linear-gradient(top, #7a3978 5%, #560f7a 100%);
+    background:linear-gradient(to bottom, #7a3978 5%, #560f7a 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#768d87', endColorstr='#6c7c7c',GradientType=0);
+    background-color: #560f7a;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    border:1px solid #560f7a;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:10px;
+    font-weight:bold;
+    padding:8px 17px;
+    text-decoration:none;
+    text-shadow:0px -1px 0px #2b665e;
+}
+button :hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7a3978), color-stop(1, #560f7a));
+    background:-moz-linear-gradient(top, #7a3978 5%, #560f7a 100%);
+    background:-webkit-linear-gradient(top, #7a3978 5%, #560f7a 100%);
+    background:-o-linear-gradient(top, #7a3978 5%, #560f7a 100%);
+    background:-ms-linear-gradient(top, #7a3978 5%, #560f7a 100%);
+    background:linear-gradient(to bottom, #7a3978 5%, #560f7a 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#6c7c7c', endColorstr='#768d87',GradientType=0);
+    background-color: #560f7a;
+}
+button :active {
+    position:relative;
+    top:1px;
+}
+
+input[type=radio].css-checkbox {
+    position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+}
+
+input[type=radio].css-checkbox + label.css-label {
+    padding-left:21px;
+    height:16px;
+    display:inline-block;
+    line-height:16px;
+    background-repeat:no-repeat;
+    background-position: 0 0;
+    font-size:16px;
+    vertical-align:middle;
+    cursor:pointer;
+
+}
+
+input[type=radio].css-checkbox:checked + label.css-label {
+    background-position: 0 -16px;
+}
+label.css-label {
+    background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_72a8a99d9e1f2d8a47fd0d7e0e667e37.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.dropdown {
+    position: center;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    left: 236px;
+    top: 30px;
+    border-radius: 10%;
+    background-color: #f9f9f9;
+    min-width: 460px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    border-radius: 5px 5px 30px 5px;
+    display:inline; margin:0;
+    width:auto;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+}
+
+.desc {
+    color: black;
+    padding: 45px;
+    text-align: center;
+    display:inline; margin:0;
+    width:auto;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    border-radius: 30px 5px 30px 5px;
+}
+
 
 .cv-block {
     text-align: left;
@@ -47,9 +156,8 @@ document {
 
 .page-block a {
     text-align-all: right;
-    padding-right: 10px;
     font-weight: bold;
-    color: black;
+    color: mediumpurple;
     text-decoration: none;
 }
 
