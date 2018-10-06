@@ -12,6 +12,7 @@ public class Verify extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) {
         String action = req.getParameter("action");
         String email = req.getParameter("email");
+        String key = req.getParameter("key");
         DataBaseMethods dbm = new DataBaseMethods();
         HttpSession session = req.getSession();
 
@@ -23,15 +24,17 @@ public class Verify extends HttpServlet {
                     e.printStackTrace();
                 }
             } else {
-                dbm.verify(email);
-                long value = dbm.getIDbyEmail(email);
-                System.out.println(value);
-                session.setAttribute("userid", value);
-                session.setAttribute("verified", 1);
-                try {
-                    resp.sendRedirect("home.jsp");
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (dbm.getKey(email).equals(key)) {
+                    dbm.verify(email, key);
+                    long value = dbm.getIDbyEmail(email);
+                    System.out.println(value);
+                    session.setAttribute("userid", value);
+                    session.setAttribute("verified", 1);
+                    try {
+                        resp.sendRedirect("home.jsp");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

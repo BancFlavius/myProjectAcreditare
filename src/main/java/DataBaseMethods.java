@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 public class DataBaseMethods {
@@ -23,12 +24,13 @@ public class DataBaseMethods {
 
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            PreparedStatement pSt = conn.prepareStatement("INSERT INTO utilizatori(firstn, lastn, upassword, email, age, uadmin, verified) VALUES (?,?,?,?,Cast(? as date), 0, 0)");
+            PreparedStatement pSt = conn.prepareStatement("INSERT INTO utilizatori(firstn, lastn, upassword, email, age, uadmin, verified, ukey) VALUES (?,?,?,?,Cast(? as date), 0, 0, ?)");
             pSt.setString(1, first);
             pSt.setString(2, last);
             pSt.setString(3, password);
             pSt.setString(4, email);
             pSt.setString(5, age);
+            pSt.setString(6, generateKey());
 
             pSt.executeUpdate();
             pSt.close();
@@ -578,7 +580,12 @@ public class DataBaseMethods {
             ResultSet rs = pSt.executeQuery();
 
             while (rs.next()){
-                verified = true;
+                if(rs.getLong("verified") == 0){
+                    System.out.println("user is not verified");
+                } else {
+                    verified = true;
+                    System.out.println("user is verified");
+                }
             }
 
             rs.close();
@@ -592,7 +599,7 @@ public class DataBaseMethods {
         return verified;
     }
 
-    static void verify(String email){
+    static void verify(String email, String key){
         try {
             Class.forName("org.postgresql.Driver");
 
@@ -602,13 +609,15 @@ public class DataBaseMethods {
 
             Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            PreparedStatement pSt = conn.prepareStatement("UPDATE utilizatori SET verified=1 WHERE email=? ");
+            PreparedStatement pSt = conn.prepareStatement("UPDATE utilizatori SET verified=1 WHERE email=? AND ukey=?");
             pSt.setString(1, email);
+            pSt.setString(2, key);
 
             pSt.executeUpdate();
 
             pSt.close();
             conn.close();
+            System.out.println("user verified");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
@@ -713,6 +722,43 @@ public class DataBaseMethods {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String generateKey() {
+        String uuid = UUID.randomUUID().toString();
+        return uuid.replaceAll("-","");
+    }
+
+    static String getKey(String email){
+        String key = "";
+
+        try {
+            Class.forName("org.postgresql.Driver");
+
+            final String URL = "jdbc:postgresql://54.93.65.5:5432/flavius8";
+            final String USERNAME = "fasttrackit_dev";
+            final String PASSWORD = "fasttrackit_dev";
+
+            Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            PreparedStatement pSt = conn.prepareStatement("SELECT ukey FROM utilizatori WHERE email=?");
+            pSt.setString(1, email);
+
+            ResultSet rs = pSt.executeQuery();
+
+            while (rs.next()){
+                key = rs.getString("ukey").trim();
+            }
+
+            rs.close();
+            pSt.close();
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return key;
     }
 
     static long toLong(Object o){

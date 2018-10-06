@@ -36,7 +36,7 @@ $(document).ready(function() {
 
         });
         if (counter == 0) {
-            randuri += `<div class="page-block">No feedbacks to review.</div>`;
+            randuri += `<div class="page-block">No cvs to review.</div>`;
         }
         $("#object").html(randuri);
     }

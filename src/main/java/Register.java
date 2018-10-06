@@ -44,7 +44,7 @@ public class Register extends HttpServlet {
                                 @Override
                                 public void run() {
                                     try {
-                                        EmailSender.send(email, "Welcome", "Welcome to our app. Please verify your account: http://localhost:8080/verify?action=verify&email="+email);
+                                        EmailSender.send(email, "Welcome", "Welcome to our app. Please verify your account: http://localhost:8080/verify?action=verify&email="+email+"&key="+dbm.getKey(email));
                                     } catch (MessagingException e) {
                                         e.printStackTrace();
                                     }
